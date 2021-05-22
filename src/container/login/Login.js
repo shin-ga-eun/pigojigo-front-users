@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, Modal, Form } from 'semantic-ui-react'
+import { Modal, Form, Button} from 'semantic-ui-react'
 import { TextField, Grid, FormLabel, Input, Avatar} from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import useStyles from './style/style.js'
@@ -78,18 +78,18 @@ class Login extends Component {
                     Sign In
                 </Button>
                 <Modal    
-                    style={{width:400}}
+                    style={{width:500}}
                     open={this.state.open} 
                     onClose={this.handleClose}> 
                     <Modal.Header>                     
                         Sign In
                     </Modal.Header>
                     <Modal.Content>
-                        <Avatar className={classes.avatar}>
+                        <Avatar style={{marginLeft : 200}}>
                         <LockOutlinedIcon />
                         </Avatar>
                         <TextField
-                            style={{width: 300}}
+                            style={{width: 370, marginLeft : 40}}
                             variant="outlined"
                             margin="normal"
                             required
@@ -103,7 +103,7 @@ class Login extends Component {
                         />
                         <br/>
                         <TextField
-                            style={{width: 300}}
+                            style={{width: 370, marginLeft : 40}}
                             variant="outlined"
                             margin="normal"
                             required
@@ -117,8 +117,8 @@ class Login extends Component {
                         />
                     </Modal.Content>
                     <Modal.Actions>
-                        <Button variant="outlined" color="primary" onClick={this.handleFormSubmit}>로그인</Button>
-                        <Button variant="outlined" color="primary" onClick={this.handleClose}>닫기</Button>
+                        <Button variant="outlined" primary onClick={this.handleFormSubmit}>Sign In</Button>
+                        <Button variant="outlined" onClick={this.handleClose}>close</Button>
                     </Modal.Actions>
                 </Modal>
                

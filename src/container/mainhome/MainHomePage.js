@@ -19,6 +19,7 @@ import {
 } from 'semantic-ui-react'
 import SeasonPage from '../seasons/SeasonPage'
 import Login from '../login/Login'
+import {Link} from "react-router-dom";
 
 const { MediaContextProvider, Media } = createMedia({
   breakpoints: {
@@ -52,7 +53,10 @@ const HomepageHeading = ({ mobile }) => (
         }}
       />
       <Button primary size='huge'>
-        꽃 정기구독 신청하러가기
+        {/* <Link to={`/ArtItemMore/${card.id}`} size="small" color="primary"> */}
+        {/* <Link to={``} size="small" color="primary">  */}
+         꽃 정기구독 신청하러가기
+        {/* </Link> */}
         <Icon name='right arrow' />
       </Button>
     </Container>
@@ -119,9 +123,7 @@ class DesktopContainer extends Component {
                 <Menu.Item as='a'>나의 구독</Menu.Item>
                 <Menu.Item position='right'>
                   {isLogin === false && 
-                  <Login as='a' inverted={!fixed}>
-                    Log in
-                  </Login>
+                  <Login as='a' inverted={!fixed} />
                   } 
                   { isLogin === true &&
                     <h1> 000님, 환영합니다. </h1> //TODO
