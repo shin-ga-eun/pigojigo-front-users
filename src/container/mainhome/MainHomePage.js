@@ -18,6 +18,7 @@ import {
   Visibility,
 } from 'semantic-ui-react'
 import SeasonPage from '../seasons/SeasonPage'
+import Login from '../login/Login'
 
 const { MediaContextProvider, Media } = createMedia({
   breakpoints: {
@@ -63,23 +64,38 @@ const HomepageHeading = ({ mobile }) => (
 
 class DesktopContainer extends Component {
 
-    state = {}
+  state = {
+    isLogin : false,
+    role: "",
+  }
 
     hideFixedMenu = () => this.setState({ fixed: false })
     showFixedMenu = () => this.setState({ fixed: true })
 
+    handleLogin = (isLogin, role) => {
+      this.setState({
+        isLogin,
+        role,
+      });
+    }
+
+    handleLogout = async () => {
+      //TODO axios 연동
+
+    }
+
     render() {
 
         const { children } = this.props
-        const { fixed } = this.state
+        const { fixed, isLogin, role } = this.state
 
         return (
-            <Media greaterThan='mobile'>
-            <Visibility
+          <Media greaterThan='mobile'>
+          <Visibility
             once={false}
-          onBottomPassed={this.showFixedMenu}
-          onBottomPassedReverse={this.hideFixedMenu}
-        >
+            onBottomPassed={this.showFixedMenu}
+            onBottomPassedReverse={this.hideFixedMenu}
+          >
           <Segment
             inverted
             textAlign='center'
@@ -102,9 +118,14 @@ class DesktopContainer extends Component {
                 <Menu.Item as='a'>스타일링</Menu.Item>
                 <Menu.Item as='a'>나의 구독</Menu.Item>
                 <Menu.Item position='right'>
-                  <Button as='a' inverted={!fixed}>
+                  {isLogin === false && 
+                  <Login as='a' inverted={!fixed}>
                     Log in
-                  </Button>
+                  </Login>
+                  } 
+                  { isLogin === true &&
+                    <h1> 000님, 환영합니다. </h1> //TODO
+                  }
                   <Button as='a' inverted={!fixed} primary={fixed} style={{ marginLeft: '0.5em' }}>
                     Sign Up
                   </Button>
@@ -171,8 +192,6 @@ DesktopContainer.propTypes = {
           </Grid.Row>
         </Grid>
       </Segment>
-  
-      
   
       <Segment style={{ padding: '8em 0em' }} vertical>
         <Container text>
