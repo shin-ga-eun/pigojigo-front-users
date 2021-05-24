@@ -19,7 +19,8 @@ import {
 } from 'semantic-ui-react'
 import SeasonPage from '../seasons/SeasonPage'
 import Login from '../login/Login'
-import {Link} from "react-router-dom";
+import SubScription from '../subscription/SubScription'
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom"; 
 
 const { MediaContextProvider, Media } = createMedia({
   breakpoints: {
@@ -52,13 +53,15 @@ const HomepageHeading = ({ mobile }) => (
           marginTop: mobile ? '0.5em' : '1.5em',
         }}
       />
+      <Router>
       <Button primary size='huge'>
-        {/* <Link to={`/ArtItemMore/${card.id}`} size="small" color="primary"> */}
-        {/* <Link to={``} size="small" color="primary">  */}
-         꽃 정기구독 신청하러가기
-        {/* </Link> */}
+            {/* SubScription */}
+          {/* <Route exact path="/subscription" component={SubScription}> */}
+          꽃 정기구독 신청하러가기
+         {/* </Route> */}
         <Icon name='right arrow' />
       </Button>
+      </Router>
     </Container>
   )
 
@@ -73,8 +76,9 @@ class DesktopContainer extends Component {
     role: "",
   }
 
-    hideFixedMenu = () => this.setState({ fixed: false })
-    showFixedMenu = () => this.setState({ fixed: true })
+  hideFixedMenu = () => this.setState({ fixed: false })
+
+  showFixedMenu = () => this.setState({ fixed: true })
 
     handleLogin = (isLogin, role) => {
       this.setState({
@@ -92,55 +96,70 @@ class DesktopContainer extends Component {
 
         const { children } = this.props
         const { fixed, isLogin, role } = this.state
+        const {moveScrollTo} = this
 
         return (
-          <Media greaterThan='mobile'>
-          <Visibility
-            once={false}
-            onBottomPassed={this.showFixedMenu}
-            onBottomPassedReverse={this.hideFixedMenu}
-          >
-          <Segment
-            inverted
-            textAlign='center'
-            style={{ minHeight: 700, padding: '1em 0em' }}
-            vertical
-          >
-            <Menu
-              fixed={fixed ? 'top' : null}
-              inverted={!fixed}
-              pointing={!fixed}
-              secondary={!fixed}
-              size='large'
+          <Media greaterThan="mobile">
+            <Visibility
+              once={false}
+              onBottomPassed={this.showFixedMenu}
+              onBottomPassedReverse={this.hideFixedMenu}
             >
-              <Container>
-                <Menu.Item as='a' active>
-                  꽃 정기구독 신청
-                </Menu.Item>
-                <Menu.Item as='a'>시즌상품</Menu.Item>
-                <Menu.Item as='a'>이용방법</Menu.Item>
-                <Menu.Item as='a'>스타일링</Menu.Item>
-                <Menu.Item as='a'>나의 구독</Menu.Item>
-                <Menu.Item position='right'>
-                  {isLogin === false && 
-                  <Login as='a' inverted={!fixed} />
-                  } 
-                  { isLogin === true &&
-                    <h1> 000님, 환영합니다. </h1> //TODO
-                  }
-                  <Button as='a' inverted={!fixed} primary={fixed} style={{ marginLeft: '0.5em' }}>
-                    Sign Up
-                  </Button>
-                </Menu.Item>
-              </Container>
-            </Menu>
-            <HomepageHeading />
-          </Segment>
-        </Visibility>
+              <Segment
+                inverted
+                textAlign="center"
+                style={{ minHeight: 700, padding: "1em 0em" }}
+                vertical
+              >
+                <Menu
+                  fixed={fixed ? "top" : null}
+                  inverted={!fixed}
+                  pointing={!fixed}
+                  secondary={!fixed}
+                  size="large"
+                >
+                  <Container>
+                      <Menu.Item as={Link} to="/subscription" active onClick={ () => window.scrollTo(100, 50)}>
+                        정기구독 신청
+                      </Menu.Item>
+                      <Menu.Item as={Link} to="/seasons" onClick={ () => window.scrollTo(100, 700)}>
+                        시즌상품
+                      </Menu.Item>
+                      <Menu.Item as={Link} to="/howtouse" onClick={ () => window.scrollTo(100, 1000)}>
+                        이용방법
+                      </Menu.Item>
+                      <Menu.Item as={Link} to="/styling" onClick={ () => window.scrollTo(100, 1200)}>
+                        스타일링
+                      </Menu.Item>
+                      <Menu.Item as={Link} to="/mypage" onClick={ () => window.scrollTo(100, 500)}> {/*TODO: mypage 추가*/}
+                        나의 구독
+                      </Menu.Item>
+                      <Menu.Item position="right">
+                        {isLogin === false && (
+                          <Login as="a" inverted={!fixed} />
+                        )}
+                        {
+                          isLogin === true && <h1> 000님, 환영합니다. </h1> //TODO
+                        }
+                        <Button
+                          as="a"
+                          inverted={!fixed}
+                          primary={fixed}
+                          style={{ marginLeft: "0.5em" }}
+                        >
+                          Sign Up
+                        </Button>
+                      </Menu.Item>
+                
+                  </Container>
+                </Menu>
+                <HomepageHeading />
+              </Segment>
+            </Visibility>
 
-        {children}
-      </Media>
-        )
+            {children}
+          </Media>
+        );
     }
 }
 
@@ -164,6 +183,8 @@ DesktopContainer.propTypes = {
   }
   
   const MainHomePage = () => (
+
+    <Router>
     <ResponsiveContainer>
       <Segment style={{ padding: '8em 0em' }} vertical>
         {/* 1구간 */}
@@ -174,8 +195,10 @@ DesktopContainer.propTypes = {
                 매월 업데이트되는 신선한 꽃을 구독하세요 !
               </Header>
                 {/* 시즌상품 페이지 꽃 이미지 / 꽃 정보 목록 출력  */}
-                <SeasonPage/>     
-              <Header as='h3' style={{ fontSize: '2em' }}>
+                {/* <Route exact path='/seasons' component={SeasonPage}/> */}
+                  <SeasonPage/>     
+               
+               <Header as='h3' style={{ fontSize: '2em' }}>
                 원하는 기간동안, <br/>
                 원하는 만큼 꽃을 구독해보세요.
               </Header>
@@ -203,11 +226,13 @@ DesktopContainer.propTypes = {
           <p style={{ fontSize: '1.33em' }}>
             다른 고객 후기 목록 top 5 출력 
           </p>
+         
+          
           <Button as='a' size='large'>
             후기 더보러가기 (페이지 이동)
             <Icon name='right arrow' />
           </Button>
-  
+       
           <Divider
             as='h4'
             className='header'
@@ -266,6 +291,7 @@ DesktopContainer.propTypes = {
         </Container>
       </Segment>
     </ResponsiveContainer>
+    </Router>
   )
 
 export default MainHomePage;
