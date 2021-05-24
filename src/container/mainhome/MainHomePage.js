@@ -2,6 +2,7 @@
 /* eslint-disable react/no-multi-comp */
 import React, { Component } from 'react'
 import { createMedia } from '@artsy/fresnel'
+import { Paper } from '@material-ui/core';
 import PropTypes from 'prop-types'
 import {
   Button,
@@ -17,10 +18,12 @@ import {
   Sidebar,
   Visibility,
 } from 'semantic-ui-react'
+
 import SeasonPage from '../seasons/SeasonPage'
 import Login from '../login/Login'
 import SubScription from '../subscription/SubScription'
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom"; 
+import review11 from '/Users/sge/react-workspace/pigojigo/src/resources/flower/review11.jpeg'
 
 const { MediaContextProvider, Media } = createMedia({
   breakpoints: {
@@ -31,37 +34,48 @@ const { MediaContextProvider, Media } = createMedia({
 })
 
 const HomepageHeading = ({ mobile }) => (
-    <Container text>
+    <Container
+      fullwidth
+      >
+      <Grid columns={2} style={{marginLeft:20}}>
+      <Grid.Column verticalAlign='center' >
       <Header
-        as='h1'
-        content='꽃 구독 서비스 명'
+        content='배달의 민꽃'
         inverted
         style={{
-          fontSize: mobile ? '2em' : '4em',
+          fontSize: mobile ? '2em' : '3.3em',
           fontWeight: 'normal',
           marginBottom: 0,
-          marginTop: mobile ? '1.5em' : '3em',
+          marginTop: mobile ? '1.3em' : '2.5em',
         }}
       />
       <Header
-        as='h6'
         content='꽃이 주는 소소한 행복을 구독하세요.'
         inverted
         style={{
-          fontSize: mobile ? '1.5em' : '1.7em',
+          fontSize: mobile ? '1.0em' : '1.3em',
           fontWeight: 'normal',
           marginTop: mobile ? '0.5em' : '1.5em',
+          marginBottom:20
         }}
       />
-      <Router>
-      <Button primary size='huge'>
-            {/* SubScription */}
-          {/* <Route exact path="/subscription" component={SubScription}> */}
-          꽃 정기구독 신청하러가기
-         {/* </Route> */}
-        <Icon name='right arrow' />
-      </Button>
-      </Router>
+
+      {/* 꽃 정기구독 신청하러가기  */}
+      <SubScription/>
+      </Grid.Column>
+
+      <Grid.Column>
+        
+        <img
+          style={{marginTop:20}}
+          height="500"   
+          src={review11}
+          opacity = "0.5"
+          alt="background"
+          />
+        
+        </Grid.Column>
+      </Grid>
     </Container>
   )
 
@@ -104,11 +118,11 @@ class DesktopContainer extends Component {
               once={false}
               onBottomPassed={this.showFixedMenu}
               onBottomPassedReverse={this.hideFixedMenu}
-            >
-              <Segment
+            > 
+            <Segment
                 inverted
-                textAlign="center"
-                style={{ minHeight: 700, padding: "1em 0em" }}
+                textAlign="left"
+                style={{ minHeight: 650, padding: "1em 0em"}}
                 vertical
               >
                 <Menu
@@ -122,10 +136,10 @@ class DesktopContainer extends Component {
                       <Menu.Item as={Link} to="/subscription" active onClick={ () => window.scrollTo(100, 50)}>
                         정기구독 신청
                       </Menu.Item>
-                      <Menu.Item as={Link} to="/seasons" onClick={ () => window.scrollTo(100, 700)}>
+                      <Menu.Item as={Link} to="/seasons" onClick={ () => window.scrollTo(100, 600)}>
                         시즌상품
                       </Menu.Item>
-                      <Menu.Item as={Link} to="/howtouse" onClick={ () => window.scrollTo(100, 1000)}>
+                      <Menu.Item as={Link} to="/howtouse" onClick={ () => window.scrollTo(100, 900)}>
                         이용방법
                       </Menu.Item>
                       <Menu.Item as={Link} to="/styling" onClick={ () => window.scrollTo(100, 1200)}>
@@ -154,7 +168,7 @@ class DesktopContainer extends Component {
                   </Container>
                 </Menu>
                 <HomepageHeading />
-              </Segment>
+            </Segment>
             </Visibility>
 
             {children}
@@ -186,6 +200,7 @@ DesktopContainer.propTypes = {
 
     <Router>
     <ResponsiveContainer>
+
       <Segment style={{ padding: '8em 0em' }} vertical>
         {/* 1구간 */}
         <Grid container stackable verticalAlign='middle'>

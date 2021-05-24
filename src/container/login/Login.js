@@ -74,7 +74,7 @@ class Login extends Component {
 
         return (
             <div>
-               <Button color="inherit" onClick={this.handleClickOpen}>
+                <Button color="inherit" onClick={this.handleClickOpen}>
                     Sign In
                 </Button>
                 <Modal    
