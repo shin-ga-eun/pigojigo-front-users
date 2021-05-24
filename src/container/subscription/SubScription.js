@@ -133,7 +133,7 @@ function SubScription () {
             fullWidth
             open={open} 
             onClose={handleClickClose}> 
-            <Modal.Header>                     
+            <Modal.Header align='center'>                     
                 지금 바로 꽃 구독 서비스를 신청해보세요 !
             </Modal.Header>
             <Modal.Content scrolling>

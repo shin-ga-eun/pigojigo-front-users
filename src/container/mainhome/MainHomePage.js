@@ -20,6 +20,8 @@ import {
 } from 'semantic-ui-react'
 
 import SeasonPage from '../seasons/SeasonPage'
+import ReviewPage from '../review/ReviewPage'
+import HowToUse from '../howtouse/HowToUse'
 import Login from '../login/Login'
 import SubScription from '../subscription/SubScription'
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom"; 
@@ -110,7 +112,6 @@ class DesktopContainer extends Component {
 
         const { children } = this.props
         const { fixed, isLogin, role } = this.state
-        const {moveScrollTo} = this
 
         return (
           <Media greaterThan="mobile">
@@ -202,26 +203,34 @@ DesktopContainer.propTypes = {
     <ResponsiveContainer>
 
       <Segment style={{ padding: '8em 0em' }} vertical>
-        {/* 1구간 */}
+   
         <Grid container stackable verticalAlign='middle'>
+
           <Grid.Row>
-            <Grid.Column>
-              <Header as='h3' style={{ fontSize: '2em' }}>
-                매월 업데이트되는 신선한 꽃을 구독하세요 !
-              </Header>
-                {/* 시즌상품 페이지 꽃 이미지 / 꽃 정보 목록 출력  */}
-                {/* <Route exact path='/seasons' component={SeasonPage}/> */}
-                  <SeasonPage/>     
-               
-               <Header as='h3' style={{ fontSize: '2em' }}>
-                원하는 기간동안, <br/>
-                원하는 만큼 꽃을 구독해보세요.
-              </Header>
-                이용방법 페이지 
-            </Grid.Column>
+            <Header style={{ fontSize: '2em' }}>
+              매월 업데이트되는 신선한 꽃을 구독하세요 !
+            </Header>
+            {/* 시즌상품 페이지 꽃 이미지 / 꽃 정보 목록 출력  */}
+            {/* <Route exact path='/seasons' component={SeasonPage}/> */}
+            <SeasonPage />     
           </Grid.Row>
 
-          {/* 2구간 */}
+          <Grid.Row style={{marginTop: 90}} verticalAlign='left'>
+            <Header style={{ fontSize: '2em'}}>
+              원하는 기간동안,  원하는 만큼 꽃을 구독해보세요.
+            </Header>
+          </Grid.Row>
+
+          <Grid.Row>
+            <HowToUse/>
+          </Grid.Row>
+      
+          <Grid.Row style={{marginTop: 90}}>
+          <Grid.Column>
+            <ReviewPage/>
+          </Grid.Column>
+          </Grid.Row>
+
           <Grid.Row>
             <Grid.Column textAlign='center'>
               <Button size='huge'>
@@ -230,23 +239,11 @@ DesktopContainer.propTypes = {
               </Button>
             </Grid.Column>
           </Grid.Row>
+
         </Grid>
-      </Segment>
-  
-      <Segment style={{ padding: '8em 0em' }} vertical>
+
+        <Grid style={{ padding: '6em 0em' }} vertical>
         <Container text>
-          <Header as='h3' style={{ fontSize: '2em' }}>
-            다른 고객들의 후기, 
-          </Header>
-          <p style={{ fontSize: '1.33em' }}>
-            다른 고객 후기 목록 top 5 출력 
-          </p>
-         
-          
-          <Button as='a' size='large'>
-            후기 더보러가기 (페이지 이동)
-            <Icon name='right arrow' />
-          </Button>
        
           <Divider
             as='h4'
@@ -254,23 +251,19 @@ DesktopContainer.propTypes = {
             horizontal
             style={{ margin: '3em 0em', textTransform: 'uppercase' }}
           >
-            <a href='#'>Case Studies</a>
+            <a href onClick = {() => window.scrollTo(100,0)}>배달의 민꽃</a>
           </Divider>
   
           <Header as='h3' style={{ fontSize: '2em' }}>
-            Did We Tell You About Our Bananas?
+           배달의 민꽃 정기구독 서비스를 선청해햐하는 이유
           </Header>
           <p style={{ fontSize: '1.33em' }}>
-            Yes I know you probably disregarded the earlier boasts as non-sequitur filler content, but
-            it's really true. It took years of gene splicing and combinatory DNA research, but our
-            bananas can really dance.
+            어쩌구저ㄱ저궁블라블라
           </p>
-          <Button as='a' size='large'>
-            I'm Still Quite Interested
-          </Button>
         </Container>
+        </Grid>
       </Segment>
-  
+
       <Segment inverted vertical style={{ padding: '5em 0em' }}>
         <Container>
           <Grid divided inverted stackable>
