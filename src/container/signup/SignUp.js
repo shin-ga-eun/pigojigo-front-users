@@ -1,29 +1,17 @@
 import React, { Component } from 'react'
-import { Modal, Form, Button} from 'semantic-ui-react'
+import { Modal, Form, Button, Icon} from 'semantic-ui-react'
 import { TextField, Grid, FormLabel, Input, Avatar} from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import useStyles from './style/style.js'
 
-class Login extends Component {
+export default class SignUp extends Component {
     state = {
         email : "",
         password : "",
-        role : "",
+        nickname: "",
+        sex: "",
+        celno: "",
+        birth: "",
         open : false,   //dialog 창 옵션
-    }
-
-    handleClickOpen= () => {
-        this.setState({
-            open: true, //dialog 창 옵션
-        });
-    }
-
-    handleClose= () => {
-        this.setState({
-            email: "",
-            password: "",
-            open: false, //dialog 창 옵션
-        });
     }
 
     handleValueChange= (e) => {
@@ -69,24 +57,16 @@ class Login extends Component {
     }
 
     render() {
-        const classes = useStyles.bind();
-        const { email, password } = this.state;
+        const { email, password, nickname, sex, celno, birth } = this.state;
 
         return (
             <div>
-                <Button color="inherit" onClick={this.handleClickOpen}>
-                    Sign In
-                </Button>
-                <Modal    
-                    style={{width:500}}
-                    open={this.state.open} 
-                    onClose={this.handleClose}> 
-                    <Modal.Header>                     
-                        Sign In
-                    </Modal.Header>
-                    <Modal.Content>
+                
+                <h1>
+                 배달의 민꽃 서비스에 가입하세요.
+                </h1>        
                         <Avatar style={{marginLeft : 200}}>
-                        <LockOutlinedIcon />
+                        <Icon name='user circle' />
                         </Avatar>
                         <TextField
                             style={{width: 370, marginLeft : 40}}
@@ -115,17 +95,12 @@ class Login extends Component {
                             autoComplete="current-password"
                             onChange={this.handleValueChange} 
                         />
-                    </Modal.Content>
-                    <Modal.Actions>
+
                         <Button primary={false}> Sign Up</Button>
-                        <Button variant="outlined" primary onClick={this.handleFormSubmit}>Sign In</Button>
-                        <Button variant="outlined" onClick={this.handleClose}>close</Button>
-                    </Modal.Actions>
-                </Modal>
-               
+                        <Button variant="outlined" primary >Sign In</Button>
+                        <Button variant="outlined" >close</Button>
+                  
             </div>
         )
     }
 }
-
-export default Login;

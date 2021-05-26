@@ -22,10 +22,11 @@ import {
 import SeasonPage from '../seasons/SeasonPage'
 import ReviewPage from '../review/ReviewPage'
 import HowToUse from '../howtouse/HowToUse'
-import Login from '../login/Login'
+import SignIn from '../signin/SignIn'
 import SubScription from '../subscription/SubScription'
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom"; 
 import review11 from '/Users/sge/react-workspace/pigojigo/src/resources/flower/review11.jpeg'
+import SignUp from '../signup/SignUp';
 
 const { MediaContextProvider, Media } = createMedia({
   breakpoints: {
@@ -150,12 +151,14 @@ class DesktopContainer extends Component {
                         나의 구독
                       </Menu.Item>
                       <Menu.Item position="right">
+                        {/* 로그인 */}
                         {isLogin === false && (
-                          <Login as="a" inverted={!fixed} />
+                          <SignIn as="a" inverted={!fixed} />
                         )}
                         {
                           isLogin === true && <h1> 000님, 환영합니다. </h1> //TODO
                         }
+                        {/* 회원가입 */}
                         <Button
                           as="a"
                           inverted={!fixed}
@@ -164,6 +167,7 @@ class DesktopContainer extends Component {
                         >
                           Sign Up
                         </Button>
+                        {/* <SignUp/> */}
                       </Menu.Item>
                 
                   </Container>
@@ -269,29 +273,29 @@ DesktopContainer.propTypes = {
           <Grid divided inverted stackable>
             <Grid.Row>
               <Grid.Column width={3}>
-                <Header inverted as='h4' content='About' />
+                <Header inverted as='h4' content='site map' />
                 <List link inverted>
-                  <List.Item as='a'>Sitemap</List.Item>
-                  <List.Item as='a'>Contact Us</List.Item>
-                  <List.Item as='a'>Religious Ceremonies</List.Item>
-                  <List.Item as='a'>Gazebo Plans</List.Item>
+                  <List.Item as={Link} to="/subscription" onClick={ () => window.scrollTo(100, 50)}> subscription to flowers</List.Item>
+                  <List.Item as={Link} to="/seasons" onClick={ () => window.scrollTo(100, 600)}>seasons</List.Item>
+                  <List.Item as={Link} to="/howtouse" onClick={ () => window.scrollTo(100, 900)}>how to use '배달의 민꽃'</List.Item>
+                  <List.Item as={Link} to="/styling" onClick={ () => window.scrollTo(100, 1200)}>how to styling</List.Item>
                 </List>
               </Grid.Column>
               <Grid.Column width={3}>
                 <Header inverted as='h4' content='Services' />
                 <List link inverted>
-                  <List.Item as='a'>Banana Pre-Order</List.Item>
-                  <List.Item as='a'>DNA FAQ</List.Item>
-                  <List.Item as='a'>How To Access</List.Item>
-                  <List.Item as='a'>Favorite X-Men</List.Item>
+                  <List.Item as={Link} to="/subscription" onClick={ () => window.scrollTo(100, 50)}> 정기구독 신청</List.Item>
+                  <List.Item as={Link} to="/seasons" onClick={ () => window.scrollTo(100, 600)}>시즌상품</List.Item>
+                  <List.Item as={Link} to="/howtouse" onClick={ () => window.scrollTo(100, 900)}>이용방법</List.Item>
+                  <List.Item as={Link} to="/styling" onClick={ () => window.scrollTo(100, 1200)}>스타일링</List.Item>
                 </List>
               </Grid.Column>
               <Grid.Column width={7}>
                 <Header as='h4' inverted>
-                  Footer Header
+                  배달의 민꽃
                 </Header>
                 <p>
-                  Extra space for a call to action inside the footer that could help re-engage users.
+                  Copyright (c) 2021 shin-ga-eun. All Rights Reserved.
                 </p>
               </Grid.Column>
             </Grid.Row>
