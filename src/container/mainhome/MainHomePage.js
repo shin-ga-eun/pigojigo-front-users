@@ -37,8 +37,12 @@ const { MediaContextProvider, Media } = createMedia({
 })
 
 const HomepageHeading = ({ mobile }) => (
-    <Container
-      fullwidth
+    
+  <Segment
+      inverted
+      textAlign="left"
+      style={{ minHeight: 100, padding: "1em 0em"}}
+      vertical
       >
       <Grid columns={2} style={{marginLeft:20}}>
       <Grid.Column verticalAlign='center' >
@@ -79,12 +83,114 @@ const HomepageHeading = ({ mobile }) => (
         
         </Grid.Column>
       </Grid>
-    </Container>
+      </Segment>
+   
   )
 
   HomepageHeading.propTypes = {
     mobile: PropTypes.bool,
   }
+  const MainHomePageUi = () => (
+  
+    <div>
+    <Segment style={{ padding: '8em 0em' }} vertical>
+  
+      <Grid container stackable verticalAlign='middle'>
+  
+        <Grid.Row>
+          <Header style={{ fontSize: '2em' }}>
+            매월 업데이트되는 신선한 꽃을 구독하세요 !
+          </Header>
+          {/* 시즌상품 페이지 꽃 이미지 / 꽃 정보 목록 출력  */}
+          {/* <Route exact path='/seasons' component={SeasonPage}/> */}
+          <SeasonPage />     
+        </Grid.Row>
+  
+        <Grid.Row style={{marginTop: 90}} verticalAlign='left'>
+          <Header style={{ fontSize: '2em'}}>
+            원하는 기간동안,  원하는 만큼 꽃을 구독해보세요.
+          </Header>
+        </Grid.Row>
+  
+        <Grid.Row>
+          <HowToUse/>
+        </Grid.Row>
+  
+        <Grid.Row style={{marginTop: 90}}>
+        <Grid.Column>
+          <ReviewPage/>
+        </Grid.Column>
+        </Grid.Row>
+  
+        <Grid.Row>
+          <Grid.Column textAlign='center'>
+            <Button size='huge'>
+              고객 스타일링 보러가기
+              <Icon name='right arrow' />
+            </Button>
+          </Grid.Column>
+        </Grid.Row>
+  
+      </Grid>
+  
+      <Grid style={{ padding: '6em 0em' }} vertical>
+      <Container text>
+    
+        <Divider
+          as='h4'
+          className='header'
+          horizontal
+          style={{ margin: '3em 0em', textTransform: 'uppercase' }}
+        >
+          <a href onClick = {() => window.scrollTo(100,0)}>배달의 민꽃</a>
+        </Divider>
+  
+        <Header as='h3' style={{ fontSize: '2em' }}>
+        배달의 민꽃 정기구독 서비스를 선청해햐하는 이유
+        </Header>
+        <p style={{ fontSize: '1.33em' }}>
+          어쩌구저ㄱ저궁블라블라
+        </p>
+      </Container>
+      </Grid>
+    </Segment>
+  
+    <Segment inverted vertical style={{ padding: '5em 0em' }}>
+      <Container>
+        <Grid divided inverted stackable>
+          <Grid.Row>
+            <Grid.Column width={3}>
+              <Header inverted as='h4' content='site map' />
+              <List link inverted>
+                <List.Item as={Link} to="/subscription" onClick={ () => window.scrollTo(100, 50)}> subscription to flowers</List.Item>
+                <List.Item as={Link} to="/seasons" onClick={ () => window.scrollTo(100, 600)}>seasons</List.Item>
+                <List.Item as={Link} to="/howtouse" onClick={ () => window.scrollTo(100, 900)}>how to use '배달의 민꽃'</List.Item>
+                <List.Item as={Link} to="/styling" onClick={ () => window.scrollTo(100, 1200)}>how to styling</List.Item>
+              </List>
+            </Grid.Column>
+            <Grid.Column width={3}>
+              <Header inverted as='h4' content='Services' />
+              <List link inverted>
+                <List.Item as={Link} to="/subscription" onClick={ () => window.scrollTo(100, 50)}> 정기구독 신청</List.Item>
+                <List.Item as={Link} to="/seasons" onClick={ () => window.scrollTo(100, 600)}>시즌상품</List.Item>
+                <List.Item as={Link} to="/howtouse" onClick={ () => window.scrollTo(100, 900)}>이용방법</List.Item>
+                <List.Item as={Link} to="/styling" onClick={ () => window.scrollTo(100, 1200)}>스타일링</List.Item>
+              </List>
+            </Grid.Column>
+            <Grid.Column width={7}>
+              <Header as='h4' inverted>
+                배달의 민꽃
+              </Header>
+              <p>
+                Copyright (c) 2021 shin-ga-eun. All Rights Reserved.
+              </p>
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
+      </Container>
+    </Segment>
+  </div>
+  )
 
 class DesktopContainer extends Component {
 
@@ -124,17 +230,17 @@ class DesktopContainer extends Component {
             <Segment
                 inverted
                 textAlign="left"
-                style={{ minHeight: 650, padding: "1em 0em"}}
+                style={{ minHeight: 100, padding: "1em 0em"}}
                 vertical
               >
                 <Menu
                   fixed={fixed ? "top" : null}
-                  inverted={!fixed}
+                  inverted={!fixed}     
                   pointing={!fixed}
                   secondary={!fixed}
                   size="large"
-                >
-                  <Container>
+                > 
+                  <Container> 
                       <Menu.Item as={Link} to="/subscription" active onClick={ () => window.scrollTo(100, 50)}>
                         정기구독 신청
                       </Menu.Item>
@@ -153,7 +259,7 @@ class DesktopContainer extends Component {
                       <Menu.Item position="right">
                         {/* 로그인 */}
                         {isLogin === false && (
-                          <SignIn as="a" inverted={!fixed} />
+                          <SignIn as="a" inverted={!fixed} href='/signin'/>
                         )}
                         {
                           isLogin === true && <h1> 000님, 환영합니다. </h1> //TODO
@@ -164,6 +270,7 @@ class DesktopContainer extends Component {
                           inverted={!fixed}
                           primary={fixed}
                           style={{ marginLeft: "0.5em" }}
+                          href='/signup'
                         >
                           Sign Up
                         </Button>
@@ -172,11 +279,11 @@ class DesktopContainer extends Component {
                 
                   </Container>
                 </Menu>
-                <HomepageHeading />
+
+                
+                
             </Segment>
             </Visibility>
-
-            {children}
           </Media>
         );
     }
@@ -200,109 +307,18 @@ DesktopContainer.propTypes = {
   ResponsiveContainer.propTypes = {
     children: PropTypes.node,
   }
-  
-  const MainHomePage = () => (
+
+
+
+const MainHomePage = () => (
 
     <Router>
-    <ResponsiveContainer>
+      <ResponsiveContainer/>
 
-      <Segment style={{ padding: '8em 0em' }} vertical>
-   
-        <Grid container stackable verticalAlign='middle'>
-
-          <Grid.Row>
-            <Header style={{ fontSize: '2em' }}>
-              매월 업데이트되는 신선한 꽃을 구독하세요 !
-            </Header>
-            {/* 시즌상품 페이지 꽃 이미지 / 꽃 정보 목록 출력  */}
-            {/* <Route exact path='/seasons' component={SeasonPage}/> */}
-            <SeasonPage />     
-          </Grid.Row>
-
-          <Grid.Row style={{marginTop: 90}} verticalAlign='left'>
-            <Header style={{ fontSize: '2em'}}>
-              원하는 기간동안,  원하는 만큼 꽃을 구독해보세요.
-            </Header>
-          </Grid.Row>
-
-          <Grid.Row>
-            <HowToUse/>
-          </Grid.Row>
+      <Route exact path="/signup" component={SignUp} />
       
-          <Grid.Row style={{marginTop: 90}}>
-          <Grid.Column>
-            <ReviewPage/>
-          </Grid.Column>
-          </Grid.Row>
-
-          <Grid.Row>
-            <Grid.Column textAlign='center'>
-              <Button size='huge'>
-                고객 스타일링 보러가기 (페이지 이동)
-                <Icon name='right arrow' />
-              </Button>
-            </Grid.Column>
-          </Grid.Row>
-
-        </Grid>
-
-        <Grid style={{ padding: '6em 0em' }} vertical>
-        <Container text>
-       
-          <Divider
-            as='h4'
-            className='header'
-            horizontal
-            style={{ margin: '3em 0em', textTransform: 'uppercase' }}
-          >
-            <a href onClick = {() => window.scrollTo(100,0)}>배달의 민꽃</a>
-          </Divider>
-  
-          <Header as='h3' style={{ fontSize: '2em' }}>
-           배달의 민꽃 정기구독 서비스를 선청해햐하는 이유
-          </Header>
-          <p style={{ fontSize: '1.33em' }}>
-            어쩌구저ㄱ저궁블라블라
-          </p>
-        </Container>
-        </Grid>
-      </Segment>
-
-      <Segment inverted vertical style={{ padding: '5em 0em' }}>
-        <Container>
-          <Grid divided inverted stackable>
-            <Grid.Row>
-              <Grid.Column width={3}>
-                <Header inverted as='h4' content='site map' />
-                <List link inverted>
-                  <List.Item as={Link} to="/subscription" onClick={ () => window.scrollTo(100, 50)}> subscription to flowers</List.Item>
-                  <List.Item as={Link} to="/seasons" onClick={ () => window.scrollTo(100, 600)}>seasons</List.Item>
-                  <List.Item as={Link} to="/howtouse" onClick={ () => window.scrollTo(100, 900)}>how to use '배달의 민꽃'</List.Item>
-                  <List.Item as={Link} to="/styling" onClick={ () => window.scrollTo(100, 1200)}>how to styling</List.Item>
-                </List>
-              </Grid.Column>
-              <Grid.Column width={3}>
-                <Header inverted as='h4' content='Services' />
-                <List link inverted>
-                  <List.Item as={Link} to="/subscription" onClick={ () => window.scrollTo(100, 50)}> 정기구독 신청</List.Item>
-                  <List.Item as={Link} to="/seasons" onClick={ () => window.scrollTo(100, 600)}>시즌상품</List.Item>
-                  <List.Item as={Link} to="/howtouse" onClick={ () => window.scrollTo(100, 900)}>이용방법</List.Item>
-                  <List.Item as={Link} to="/styling" onClick={ () => window.scrollTo(100, 1200)}>스타일링</List.Item>
-                </List>
-              </Grid.Column>
-              <Grid.Column width={7}>
-                <Header as='h4' inverted>
-                  배달의 민꽃
-                </Header>
-                <p>
-                  Copyright (c) 2021 shin-ga-eun. All Rights Reserved.
-                </p>
-              </Grid.Column>
-            </Grid.Row>
-          </Grid>
-        </Container>
-      </Segment>
-    </ResponsiveContainer>
+      <HomepageHeading/>
+      <MainHomePageUi/>
     </Router>
   )
 
