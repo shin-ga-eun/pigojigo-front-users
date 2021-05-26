@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
-import ReviewList from './container/ReviewList'
+import InitReviewTable from './container/InitReviewTable';
 
 export default class ReviewPage extends Component {
     render() {
         return (
             <div>
-                <ReviewList/>
+                <InitReviewTable/>
             </div>
         )
     }

@@ -117,6 +117,7 @@ class Login extends Component {
                         />
                     </Modal.Content>
                     <Modal.Actions>
+                        <Button primary={false}> Sign Up</Button>
                         <Button variant="outlined" primary onClick={this.handleFormSubmit}>Sign In</Button>
                         <Button variant="outlined" onClick={this.handleClose}>close</Button>
                     </Modal.Actions>
