@@ -27,6 +27,8 @@ import SubScription from '../subscription/SubScription'
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom"; 
 import review11 from '/Users/sge/react-workspace/pigojigo/src/resources/flower/review11.jpeg'
 import SignUp from '../signup/SignUp';
+import MyPage from '../mypage/MyPage';
+import StylingPage from '../review/StylingPage';
 
 const { MediaContextProvider, Media } = createMedia({
   breakpoints: {
@@ -124,8 +126,8 @@ const HomepageHeading = ({ mobile }) => (
   
         <Grid.Row>
           <Grid.Column textAlign='center'>
-            <Button size='huge'>
-              고객 스타일링 보러가기
+            <Button size='huge' href='/reviews'>
+              더 많은 구독자들 스타일링 보러가기
               <Icon name='right arrow' />
             </Button>
           </Grid.Column>
@@ -316,9 +318,24 @@ const MainHomePage = () => (
       <ResponsiveContainer/>
 
       <Route exact path="/signup" component={SignUp} />
+      <Route exact path="/reviews" component={StylingPage} />
+      <Route exact path="/mypage" component={MyPage} />
+
+      <Route exact path="/" component={HomepageHeading} />
+      <Route exact path="/subscription" component={HomepageHeading} />
+      <Route exact path="/seasons" component={HomepageHeading} />
+      <Route exact path="/styling" component={HomepageHeading} />
+      <Route exact path="/howtouse" component={HomepageHeading} />
+
+      <Route exact path="/" component={MainHomePageUi} />
+      <Route exact path="/subscription" component={MainHomePageUi} />
+      <Route exact path="/seasons" component={MainHomePageUi} />
+      <Route exact path="/styling" component={MainHomePageUi} />
+      <Route exact path="/howtouse" component={MainHomePageUi} />
       
-      <HomepageHeading/>
-      <MainHomePageUi/>
+
+      {/* <Route exact path="/mypage" component={HomepageHeading} /> */}
+    
     </Router>
   )
 

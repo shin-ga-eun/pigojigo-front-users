@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { Modal, Form, Button, Icon} from 'semantic-ui-react'
-import { TextField, Grid, FormLabel, Input, Avatar} from '@material-ui/core';
+import { Modal, Form, Button, Icon, Grid, Header, Segment} from 'semantic-ui-react'
+import { TextField,  FormLabel, Input, Avatar} from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 
 export default class SignUp extends Component {
@@ -61,13 +61,19 @@ export default class SignUp extends Component {
 
         return (
             <div>
-                
-                <h1>
-                 배달의 민꽃 서비스에 가입하세요.
-                </h1>        
+            <Segment style={{ padding: '1em 20em'}} vertical>
+                <Grid  container verticalAlign='middle'>
+                <Grid.Row>
+                <Header style={{ fontSize: '2em', marginLeft:70}}>
+                    배달의 민꽃 서비스 가입
+                </Header>
+                </Grid.Row>  
+                <Grid.Row>
                         <Avatar style={{marginLeft : 200}}>
                         <Icon name='user circle' />
                         </Avatar>
+                        </Grid.Row>
+                        <Grid.Row>
                         <TextField
                             style={{width: 370, marginLeft : 40}}
                             variant="outlined"
@@ -81,7 +87,8 @@ export default class SignUp extends Component {
                             autoFocus
                             onChange={this.handleValueChange} 
                         />
-                        <br/>
+                        </Grid.Row>
+                        <Grid.Row>
                         <TextField
                             style={{width: 370, marginLeft : 40}}
                             variant="outlined"
@@ -95,11 +102,70 @@ export default class SignUp extends Component {
                             autoComplete="current-password"
                             onChange={this.handleValueChange} 
                         />
+                         </Grid.Row>
+                         <Grid.Row>
+                        <TextField
+                            style={{width: 370, marginLeft : 40}}
+                            variant="outlined"
+                            margin="normal"
+                            required
+                            id="nickname"
+                            value ={nickname}
+                            label="Nick name"
+                            name="nickname"
+                            autoFocus
+                            onChange={this.handleValueChange} 
+                        />
+                        </Grid.Row>
+                        <Grid.Row>
+                        <TextField
+                            style={{width: 370, marginLeft : 40}}
+                            variant="outlined"
+                            margin="normal"
+                            required
+                            id="sex"
+                            value ={sex}
+                            label="sex"
+                            name="sex"
+                            autoFocus
+                            onChange={this.handleValueChange} 
+                        />
+                        </Grid.Row>
+                        <Grid.Row>
+                        <TextField
+                            style={{width: 370, marginLeft : 40}}
+                            variant="outlined"
+                            margin="normal"
+                            required
+                            id="celno"
+                            value ={celno}
+                            label="Input your Celno"
+                            name="celno"
+                            autoFocus
+                            onChange={this.handleValueChange} 
+                        />
+                        </Grid.Row>
+                        <Grid.Row>
+                        <TextField
+                            style={{width: 370, marginLeft : 40}}
+                            variant="outlined"
+                            margin="normal"
+                            required
+                            id="birth"
+                            value ={birth}
+                            label="Birth"
+                            name="birth"
+                            autoFocus
+                            onChange={this.handleValueChange} 
+                        />
+                        </Grid.Row>
+                        <Grid.Row style={{marginLeft:240}}>      
 
                         <Button primary={false}> Sign Up</Button>
-                        <Button variant="outlined" primary >Sign In</Button>
                         <Button variant="outlined" >close</Button>
-                  
+                    </Grid.Row>  
+                    </Grid>
+                </Segment>
             </div>
         )
     }
