@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Modal, Form, Button, Icon, Grid, Header, Segment} from 'semantic-ui-react'
 import { TextField,  FormLabel, Input, Avatar} from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import Axios from 'axios';
 
 export default class SignUp extends Component {
     state = {
@@ -23,45 +24,36 @@ export default class SignUp extends Component {
     handleFormSubmit= async (e) => {
         e.preventDefault(); // axios를 통하여 데이터를 넘겨주는 부분 구현해야 함
         console.log(this.state);
-        const { email, password, role } = this.state;
+        const { email, password, nickname, sex, celno, birth } = this.state;
         const { history, handleLogin } = this.props;
-
-        //TODO
-        /*
+  
         try {
-            const response = await Axios.post("", {
-                email, 
-                password,
+            const response = await Axios.post("/signUp", {
+                email, password, nickname, sex, celno, birth}
+                ,{
+                headers: {
+                    "Content-type":"application/json",
+                }
             });
 
             const { status, data } = response;
 
-            if (status === 200) {
-                console.log(`ss${data}`);
-
-                this.setState({
-                    role: response.data,
-                });
-                console.log(`dd${this.state.role}`);
-            }
-
-            this.handleClose();
-            handleLogin(true, this.state.role);
             console.log(response);
-            history.push("/");
+            alert("회원가입 되었습니다.");
+            history.push('/')
         } catch (error) {
             alert(error);
             console.log(error);
         }
-        */
     }
 
     render() {
         const { email, password, nickname, sex, celno, birth } = this.state;
+        const {handleFormSubmit} = this;
 
         return (
             <div>
-            <Segment style={{ padding: '1em 20em'}} vertical>
+            <Segment style={{ padding: '1em 10em'}} vertical>
                 <Grid  container verticalAlign='middle'>
                 <Grid.Row>
                 <Header style={{ fontSize: '2em', marginLeft:70}}>
@@ -161,7 +153,7 @@ export default class SignUp extends Component {
                         </Grid.Row>
                         <Grid.Row style={{marginLeft:240}}>      
 
-                        <Button primary={false}> Sign Up</Button>
+                        <Button primary={false} onClick={handleFormSubmit}> Sign Up</Button>
                         <Button variant="outlined" >close</Button>
                     </Grid.Row>  
                     </Grid>

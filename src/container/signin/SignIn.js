@@ -3,12 +3,13 @@ import { Modal, Form, Button} from 'semantic-ui-react'
 import { TextField, Grid, FormLabel, Input, Avatar} from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import useStyles from './style/style.js'
+import Axios from 'axios'
 
 class SignIn extends Component {
     state = {
         email : "",
         password : "",
-        role : "",
+       
         open : false,   //dialog 창 옵션
     }
 
@@ -38,34 +39,30 @@ class SignIn extends Component {
         const { email, password, role } = this.state;
         const { history, handleLogin } = this.props;
 
-        //TODO
-        /*
         try {
-            const response = await Axios.post("", {
+            const response = await Axios.post("/signIn", {
                 email, 
                 password,
+
+                headers: {
+                    "accept" : "application/json",
+
+                    "content-type" : "application/json;charset=UTF-8"
+                },
             });
 
             const { status, data } = response;
 
-            if (status === 200) {
-                console.log(`ss${data}`);
-
-                this.setState({
-                    role: response.data,
-                });
-                console.log(`dd${this.state.role}`);
-            }
-
             this.handleClose();
-            handleLogin(true, this.state.role);
+            handleLogin(true, data);
             console.log(response);
-            history.push("/");
+            //history.push("/");
+            
         } catch (error) {
             alert(error);
             console.log(error);
         }
-        */
+
     }
 
     render() {

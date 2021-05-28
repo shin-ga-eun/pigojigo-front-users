@@ -9,10 +9,10 @@ export default class CtlPaymetMthCd extends Component {
         this.state = {
            value: 'PmMthCd1'
         };
-        this.handlePickUpMthCd = this.handlePickUpMthCd.bind(this);
+        this.handlePaymentMthCd = this.handlePaymentMthCd.bind(this);
     }
 
-    handlePickUpMthCd = (e, {value}) => {
+    handlePaymentMthCd = (e, {value}) => {
         this.setState({ value })
         this.props.onData(value);
     }
@@ -29,7 +29,7 @@ export default class CtlPaymetMthCd extends Component {
                     name='radioGroup'
                     value='PmMthCd1'
                     checked={this.state.value === 'PmMthCd1'}
-                    onChange={this.handlePickUpMthCd}
+                    onChange={this.handlePaymentMthCd}
                 />
                 </Grid.Row>
                
@@ -40,7 +40,7 @@ export default class CtlPaymetMthCd extends Component {
                     value='PmMthCd2'
                     disabled
                     checked={this.state.value === 'PmMthCd2'}                        
-                    onChange={this.handlePickUpMthCd}
+                    onChange={this.handlePaymentMthCd}
                 />
                 </Grid.Row>
 
@@ -51,7 +51,7 @@ export default class CtlPaymetMthCd extends Component {
                     value='PmMthCd3'
                     disabled
                     checked={this.state.value === 'PmMthCd3'}                        
-                    onChange={this.handlePickUpMthCd}
+                    onChange={this.handlePaymentMthCd}
                 />
                 </Grid.Row>
             </Grid>

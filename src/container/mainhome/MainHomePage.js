@@ -19,6 +19,7 @@ import {
   Visibility,
 } from 'semantic-ui-react'
 
+import Axios from 'axios'
 import SeasonPage from '../seasons/SeasonPage'
 import ReviewPage from '../review/ReviewPage'
 import HowToUse from '../howtouse/HowToUse'
@@ -27,7 +28,7 @@ import SubScription from '../subscription/SubScription'
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom"; 
 import review11 from '/Users/sge/react-workspace/pigojigo/src/resources/flower/review11.jpeg'
 import SignUp from '../signup/SignUp';
-import MyPage from '../mypage/MyPage';
+import MyPage from '../mypage/RqdocList';
 import StylingPage from '../review/StylingPage';
 
 const { MediaContextProvider, Media } = createMedia({
@@ -48,15 +49,16 @@ const HomepageHeading = ({ mobile }) => (
       >
       <Grid columns={2} style={{marginLeft:20}}>
       <Grid.Column verticalAlign='center' >
-      <Header
+      <Button
         content='배달의 민꽃'
-        inverted
+        color='black'
         style={{
           fontSize: mobile ? '2em' : '3.3em',
           fontWeight: 'normal',
           marginBottom: 0,
           marginTop: mobile ? '1.3em' : '2.5em',
         }}
+        href='/'
       />
       <Header
         content='꽃이 주는 소소한 행복을 구독하세요.'
@@ -70,7 +72,7 @@ const HomepageHeading = ({ mobile }) => (
       />
 
       {/* 꽃 정기구독 신청하러가기  */}
-      <SubScription/>
+      <SubScription /> 
       </Grid.Column>
 
       <Grid.Column>
@@ -97,14 +99,13 @@ const HomepageHeading = ({ mobile }) => (
     <div>
     <Segment style={{ padding: '8em 0em' }} vertical>
   
-      <Grid container stackable verticalAlign='middle'>
+      <Grid container stackable align='center' verticalAlign='middle'>
   
         <Grid.Row>
-          <Header style={{ fontSize: '2em' }}>
+          <Header style={{ fontSize: '2em'}}>
             매월 업데이트되는 신선한 꽃을 구독하세요 !
           </Header>
           {/* 시즌상품 페이지 꽃 이미지 / 꽃 정보 목록 출력  */}
-          {/* <Route exact path='/seasons' component={SeasonPage}/> */}
           <SeasonPage />     
         </Grid.Row>
   
@@ -194,101 +195,148 @@ const HomepageHeading = ({ mobile }) => (
   </div>
   )
 
+  
 class DesktopContainer extends Component {
-
   state = {
-    isLogin : false,
-    role: "",
+    isLogin: false,
+    response: [
+      {
+        email: "",
+        password: "",
+        nickname: "",
+      },
+    ],
+  };
+
+  hideFixedMenu = () => this.setState({ fixed: false });
+
+  showFixedMenu = () => this.setState({ fixed: true });
+
+  handleLogin = (isLogin, response) => {
+
+    this.setState({
+      isLogin,
+      response,
+    });
+  };
+
+  handleLogout = () => {
+
+    this.setState({
+      isLogin: false,
+    });
+
+  };
+
+  render() {
+    const { children } = this.props;
+    const { fixed, isLogin } = this.state;
+    const {handleLogout} = this;
+
+    return (
+      <Media greaterThan="mobile">
+        <Visibility
+          once={false}
+          onBottomPassed={this.showFixedMenu}
+          onBottomPassedReverse={this.hideFixedMenu}
+        >
+          <Segment
+            inverted
+            textAlign="left"
+            style={{ minHeight: 100, padding: "1em 0em" }}
+            vertical
+          >
+            <Menu
+              fixed={fixed ? "top" : null}
+              inverted={!fixed}
+              pointing={!fixed}
+              secondary={!fixed}
+              size="large"
+            >
+              <Container>
+                <Menu.Item
+                  as={Link}
+                  to="/subscription"
+                  active
+                  onClick={() => window.scrollTo(100, 50)}
+                >
+                  정기구독 신청
+                </Menu.Item>
+                <Menu.Item
+                  as={Link}
+                  to="/seasons"
+                  onClick={() => window.scrollTo(100, 600)}
+                >
+                  시즌상품
+                </Menu.Item>
+                <Menu.Item
+                  as={Link}
+                  to="/howtouse"
+                  onClick={() => window.scrollTo(100, 900)}
+                >
+                  이용방법
+                </Menu.Item>
+                <Menu.Item
+                  as={Link}
+                  to="/styling"
+                  onClick={() => window.scrollTo(100, 1200)}
+                >
+                  스타일링
+                </Menu.Item>
+                {isLogin === true &&
+                <Menu.Item
+                  as={Link}
+                  to="/mypage"
+                  onClick={() => window.scrollTo(100, 500)}
+                >
+                  구독 현황
+                </Menu.Item>
+                }
+                <Menu.Item position="right">
+                  {/* 로그인 */}
+                  {isLogin === false && (
+                    <SignIn
+                      handleLogin={this.handleLogin}
+                      as="a"
+                      inverted={!fixed}
+                      href="/signin"
+                    />
+                  )}
+                  {isLogin === true && (
+                    <h3> {this.state.response.nickname} 님 , 환영합니다. </h3>
+                  )}
+                  {/* 회원가입 */}
+                  {isLogin === false && (
+                    <Button
+                      as="a"
+                      inverted={!fixed}
+                      primary={fixed}
+                      style={{ marginLeft: "0.5em" }}
+                      href="/signup"
+                    >
+                      Sign Up
+                    </Button>
+                  )}
+                  {isLogin === true && (
+                    <Button 
+                      inverted={!fixed}
+                      primary={fixed}
+                      style={{ marginLeft: "0.5em" }}
+                      onClick={handleLogout} 
+                      style={{ marginLeft: 10 }}
+                      href='/'>
+                      Log out
+                      </Button>
+                  )}
+                  {/* <SignUp/> */}
+                </Menu.Item>
+              </Container>
+            </Menu>
+          </Segment>
+        </Visibility>
+      </Media>
+    );
   }
-
-  hideFixedMenu = () => this.setState({ fixed: false })
-
-  showFixedMenu = () => this.setState({ fixed: true })
-
-    handleLogin = (isLogin, role) => {
-      this.setState({
-        isLogin,
-        role,
-      });
-    }
-
-    handleLogout = async () => {
-      //TODO axios 연동
-
-    }
-
-    render() {
-
-        const { children } = this.props
-        const { fixed, isLogin, role } = this.state
-
-        return (
-          <Media greaterThan="mobile">
-            <Visibility
-              once={false}
-              onBottomPassed={this.showFixedMenu}
-              onBottomPassedReverse={this.hideFixedMenu}
-            > 
-            <Segment
-                inverted
-                textAlign="left"
-                style={{ minHeight: 100, padding: "1em 0em"}}
-                vertical
-              >
-                <Menu
-                  fixed={fixed ? "top" : null}
-                  inverted={!fixed}     
-                  pointing={!fixed}
-                  secondary={!fixed}
-                  size="large"
-                > 
-                  <Container> 
-                      <Menu.Item as={Link} to="/subscription" active onClick={ () => window.scrollTo(100, 50)}>
-                        정기구독 신청
-                      </Menu.Item>
-                      <Menu.Item as={Link} to="/seasons" onClick={ () => window.scrollTo(100, 600)}>
-                        시즌상품
-                      </Menu.Item>
-                      <Menu.Item as={Link} to="/howtouse" onClick={ () => window.scrollTo(100, 900)}>
-                        이용방법
-                      </Menu.Item>
-                      <Menu.Item as={Link} to="/styling" onClick={ () => window.scrollTo(100, 1200)}>
-                        스타일링
-                      </Menu.Item>
-                      <Menu.Item as={Link} to="/mypage" onClick={ () => window.scrollTo(100, 500)}> {/*TODO: mypage 추가*/}
-                        나의 구독
-                      </Menu.Item>
-                      <Menu.Item position="right">
-                        {/* 로그인 */}
-                        {isLogin === false && (
-                          <SignIn as="a" inverted={!fixed} href='/signin'/>
-                        )}
-                        {
-                          isLogin === true && <h1> 000님, 환영합니다. </h1> //TODO
-                        }
-                        {/* 회원가입 */}
-                        <Button
-                          as="a"
-                          inverted={!fixed}
-                          primary={fixed}
-                          style={{ marginLeft: "0.5em" }}
-                          href='/signup'
-                        >
-                          Sign Up
-                        </Button>
-                        {/* <SignUp/> */}
-                      </Menu.Item>
-                
-                  </Container>
-                </Menu>
-
-                
-                
-            </Segment>
-            </Visibility>
-          </Media>
-        );
-    }
 }
 
 DesktopContainer.propTypes = {
@@ -329,7 +377,7 @@ const MainHomePage = () => (
 
       <Route exact path="/" component={MainHomePageUi} />
       <Route exact path="/subscription" component={MainHomePageUi} />
-      <Route exact path="/seasons" component={MainHomePageUi} />
+      <Route exact path="/seasons" component={MainHomePageUi} /> 
       <Route exact path="/styling" component={MainHomePageUi} />
       <Route exact path="/howtouse" component={MainHomePageUi} />
       

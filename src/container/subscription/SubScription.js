@@ -17,6 +17,8 @@ import CtlPaymetMthCd from './CtlPaymetMthCd';
 import CtlVaseYn from './CtlVaseYn';
 import sample from '/Users/sge/react-workspace/pigojigo/src/resources/flower/sample.png'
 
+import Axios from 'axios'
+
 const useStyles = makeStyles((theme) => ({
     root: {
       width: '100%',
@@ -43,7 +45,7 @@ function getSteps() {
     ];
 }
 
-function SubScription () {
+function SubScription ({history}) {
 
     const classes = useStyles.bind();
     const [activeStep, setActiveStep] = React.useState(0);
@@ -51,11 +53,11 @@ function SubScription () {
     const steps = getSteps();
 
     const [sizeCd, setSizeCd] = React.useState('S');
-    const [pickUpCycleCd, setPickUpCycleCd] = React.useState(1);
-    const [paymentCycleCd, setPaymentCycleCd] = React.useState(1);
-    const [pickUpMthCd, setPickUpMthCd] = React.useState('PmMthCd1');
+    const [pickUpCycleCd, setPickUpCycleCd] = React.useState('1');
+    const [paymentCycleCd, setPaymentCycleCd] = React.useState('1');
+    const [paymentMthCd, setPaymentMthCd] = React.useState('PmMthCd1');
     const [vaseYn, setVaseYn] = React.useState('N');
-    
+
     const getStepContent = (step) => {
 
         switch (step) {
@@ -66,7 +68,7 @@ function SubScription () {
             case 2:
                 return <CtlPaymentCycleCd onData = {handlePaymentCycleCd}/>;
             case 3:
-                return <CtlPaymetMthCd onData = {handlePickUpMthCd}/>;
+                return <CtlPaymetMthCd onData = {handlePaymentMthCd}/>;
             case 4:
                 return <CtlVaseYn onData = {handleVaseYn}/>;
             default:
@@ -83,8 +85,8 @@ function SubScription () {
      const handlePaymentCycleCd = (data) => {
         setPaymentCycleCd(data);
     }
-    const handlePickUpMthCd = (data) => {
-        setPickUpMthCd(data);
+    const handlePaymentMthCd = (data) => {
+        setPaymentMthCd(data);
     }
     const handleVaseYn = (data) => {
         setVaseYn(data);
@@ -101,14 +103,28 @@ function SubScription () {
 
     const handleFormSubmit= async (e) => {
         e.preventDefault(); // axios를 통하여 데이터를 넘겨주는 부분 구현해야 함
-        
-        console.log(sizeCd);
-        console.log(pickUpCycleCd);
-        console.log(paymentCycleCd);
-        console.log(pickUpMthCd);
-        console.log(vaseYn);
 
-        setOpen(false);
+        try {
+            const response = await Axios.post("/subscription/apply", {
+                sizeCd, pickUpCycleCd , paymentCycleCd, paymentMthCd, vaseYn,
+                applcntEmail : 'sge7102' }
+                ,{
+                headers: {
+                    "Content-type":"application/json",
+                }
+            });
+
+            const { status, data } = response;
+
+            console.log(response);
+            alert("구독이 신청 되었습니다.");
+
+            handleClickClose();
+            
+        } catch (error) {
+            alert(error);
+            console.log(error);
+        }
     }
   
     const handleNext = () => {
