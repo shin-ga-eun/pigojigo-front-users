@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
-import {Button} from 'semantic-ui-react'
+import {Button, Icon} from 'semantic-ui-react'
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import TextField from "@material-ui/core/TextField";
 import Axios, { post } from "axios";
+import { Typography } from '@material-ui/core';
 
 export default class CtlReviewAddBtn extends Component {
 
@@ -82,14 +83,14 @@ export default class CtlReviewAddBtn extends Component {
         return (
             <div>
                 <Button
-                  variant="contained"
                   color="black"
                   onClick={this.handleClickOpen}
                   style={{
-                      paddingLeft: 15, paddingRight: 15, fontSize: 17, margin: 15,
+                    width:200, paddingLeft: 15, paddingRight: 15, fontSize: 17, margin: 15,
                   }}
                  >
-                리뷰 쓰러가기
+                    <Icon name='pencil'/>
+                    리뷰 작성하러가기 
                 </Button>
 
               <Dialog

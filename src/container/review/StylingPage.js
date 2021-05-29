@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import { Modal, Form, Button, Icon, Grid, Header, Segment} from 'semantic-ui-react'
-import CtlReviewAddBtn from './container/CtlReviewAddBtn'
+import CtlReviewAddBtn from './container/styling/CtlReviewAddBtn';
 import axios from 'axios';
+import StylingList from './container/styling/StylingList';
+import { Typography } from '@material-ui/core';
 
 export default class StylingPage extends Component {
 
@@ -46,11 +48,24 @@ export default class StylingPage extends Component {
             <div>
                 <Segment style={{ padding: '1em 8em'}} vertical>
                 
-
-               
-                <CtlReviewAddBtn/>
-
+                <Grid
+                    container
+                    direction="column"
+                    justify="flex-end"
+                    alignItems="flex-end"
+                    >
+                <Grid container spacing={2}>
+                    <Grid xs={8}>
                         
+                    </Grid>
+                    <Grid xs={4}>
+                        <CtlReviewAddBtn/>
+                    </Grid>
+                </Grid>  
+                <Grid>
+                    <StylingList/>
+                </Grid>  
+                </Grid>
                     
                 </Segment>
             </div>
