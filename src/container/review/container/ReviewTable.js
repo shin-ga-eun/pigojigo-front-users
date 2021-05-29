@@ -69,9 +69,9 @@ const useRowStyles = makeStyles({
             textOverflow='ellipsis'
             overflow='hidden'
             whiteSpace='nowrap'>
-                {convertReviewCn(row.reviewCn)}
+                {row.singleLineEval}
           </TableCell>
-          <TableCell align="center" width="180px">{row.regDate}</TableCell>
+          <TableCell align="center" width="180px">{row. reqDtm}</TableCell>
         </TableRow>
         <TableRow>
           <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
@@ -80,14 +80,14 @@ const useRowStyles = makeStyles({
               <Grid columns={2} textAlign='left' relaxed='very'>
                   <Grid.Column >
                     <Card>
-                       <img alt="고객 리뷰사진" src={row.reviewImg} />
+                       <img alt="고객 리뷰사진" src={row.imgUrl} style={{width: 250, height: 300}}/>
                     </Card>
                   </Grid.Column>
                   <Grid.Column style={{marginTop: '5px', marginBottom: '10px'}}>
+                  <h4>한줄 평가</h4>
+                    {row.singleLineEval}
                     <h4>고객 후기</h4>
                     {row.reviewCn}
-                    <h4>한줄 평가</h4>
-                    {row.singleLineEval}
                     
                   </Grid.Column>
               </Grid>
@@ -114,13 +114,14 @@ const useRowStyles = makeStyles({
 
 export default function ReviewTable(props) {
 
-  const reviewRows = props.reviewRows
+  const reviews = props.reviews
 
   return (
         <TableContainer component={Paper}>
             <Table aria-label="collapsible table">
                 <TableBody>
-                {reviewRows.map((row) => (
+                {reviews && reviews.map((row) => (
+                    
                     <Row key={row.name} row={row} />
                 ))}
                 </TableBody>

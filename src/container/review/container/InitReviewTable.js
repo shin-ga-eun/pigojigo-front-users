@@ -1,70 +1,38 @@
 import React, { Component } from 'react'
 import ReviewTable from './ReviewTable'
+import axios from "axios";
 
 export default class InitReviewTable extends Component {
     state = {
-        reviewRows: [
-          {
-            nickname : '사용자',
-            birth : '24',  
-            sex: '여', 
-            subCnt: 10, 
-            reviewCn: '가나다라가나다라가나다라가나다라가나다라가나다라가나다라가나다라가나다라가나다라가나다라가나다라가나다라가나다라가나다라가나다라가나다라가나다라가나다라가나다라', 
-            singleLineEval: '마바사아', 
-            regDate: '2021-02-10', 
-            reviewImg: 'imgUrl', 
-          },
-          {
-            nickname : '사용자',
-            birth : '20',  
-            sex: '여', 
-            subCnt: 10, 
-            reviewCn: '가나다라가나다라가나다라가나다라가나다라가나다라가나다라가나다라가나다라가나다라가나다라가나다라가나다라가나다라가나다라가나다라가나다라가나다라가나다라가나다라', 
-            singleLineEval: '마바사아', 
-            regDate: '2021-02-10', 
-            reviewImg: 'imgUrl', 
-          },
-          {
-            nickname : '사용자',
-            birth : '28',  
-            sex: '여', 
-            subCnt: 10, 
-            reviewCn: '가나다라가나다라가나다라가나다라가나다라가나다라가나다라가나다라가나다라가나다라가나다라가나다라가나다라가나다라가나다라가나다라가나다라가나다라가나다라가나다라', 
-            singleLineEval: '마바사아', 
-            regDate: '2021-02-10', 
-            reviewImg: 'imgUrl', 
-          },
-          {
-            nickname : '사용자',
-            birth : '28',  
-            sex: '여', 
-            subCnt: 10, 
-            reviewCn: '가나다라가나다라가나다라가나다라가나다라가나다라가나다라가나다라가나다라가나다라가나다라가나다라가나다라가나다라가나다라가나다라가나다라가나다라가나다라가나다라', 
-            singleLineEval: '마바사아', 
-            regDate: '2021-02-10', 
-            reviewImg: 'imgUrl', 
-          },
-          {
-            nickname : '사용자',
-            birth : '28',  
-            sex: '여', 
-            subCnt: 10, 
-            reviewCn: '가나다라가나다라가나다라가나다라가나다라가나다라가나다라가나다라가나다라가나다라가나다라가나다라가나다라가나다라가나다라가나다라가나다라가나다라가나다라가나다라', 
-            singleLineEval: '마바사아', 
-            regDate: '2021-02-10', 
-            reviewImg: 'imgUrl', 
-          },
-         
-        ],
+        reviews: [],
     };
-   
+
+    componentDidMount = async () => {
+      // GET /reviews
+      try {
+          const response = await axios.get("/main/reviews");
+          const { status, data } = response;
+          if (status === 200) {
+             
+             
+              this.setState({
+                 
+                  reviews: data,
+              });
+              console.log(this.state.reviews);
+          }
+      } catch (e) {
+
+      }
+    } 
+
     render() {
-        const { reviewRows } = this.state;
-    
-        //TODO: 고객 후기 top5 조회
+
+      const {reviews} = this.state;
+
         return (
           <div>
-            <ReviewTable reviewRows = {reviewRows}/>
+            <ReviewTable reviews = {reviews}/>
           </div>
         );
     }

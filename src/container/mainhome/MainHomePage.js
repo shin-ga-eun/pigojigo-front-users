@@ -127,7 +127,7 @@ const HomepageHeading = ({ mobile }) => (
   
         <Grid.Row>
           <Grid.Column textAlign='center'>
-            <Button size='huge' href='/reviews'>
+            <Button size='huge' as={Link} to="/reviews">
               더 많은 구독자들 스타일링 보러가기
               <Icon name='right arrow' />
             </Button>
@@ -168,7 +168,7 @@ const HomepageHeading = ({ mobile }) => (
                 <List.Item as={Link} to="/subscription" onClick={ () => window.scrollTo(100, 50)}> subscription to flowers</List.Item>
                 <List.Item as={Link} to="/seasons" onClick={ () => window.scrollTo(100, 600)}>seasons</List.Item>
                 <List.Item as={Link} to="/howtouse" onClick={ () => window.scrollTo(100, 900)}>how to use '배달의 민꽃'</List.Item>
-                <List.Item as={Link} to="/styling" onClick={ () => window.scrollTo(100, 1200)}>how to styling</List.Item>
+                <List.Item as={Link} to="/reviews" onClick={ () => window.scrollTo(100, 1200)}>how to styling</List.Item>
               </List>
             </Grid.Column>
             <Grid.Column width={3}>
@@ -177,7 +177,7 @@ const HomepageHeading = ({ mobile }) => (
                 <List.Item as={Link} to="/subscription" onClick={ () => window.scrollTo(100, 50)}> 정기구독 신청</List.Item>
                 <List.Item as={Link} to="/seasons" onClick={ () => window.scrollTo(100, 600)}>시즌상품</List.Item>
                 <List.Item as={Link} to="/howtouse" onClick={ () => window.scrollTo(100, 900)}>이용방법</List.Item>
-                <List.Item as={Link} to="/styling" onClick={ () => window.scrollTo(100, 1200)}>스타일링</List.Item>
+                <List.Item as={Link} to="/reviews" onClick={ () => window.scrollTo(100, 1200)}>스타일링</List.Item>
               </List>
             </Grid.Column>
             <Grid.Column width={7}>
@@ -278,7 +278,7 @@ class DesktopContainer extends Component {
                 </Menu.Item>
                 <Menu.Item
                   as={Link}
-                  to="/styling"
+                  to="/reviews"
                   onClick={() => window.scrollTo(100, 1200)}
                 >
                   스타일링
@@ -372,7 +372,7 @@ const MainHomePage = () => (
       <Route exact path="/" component={HomepageHeading} />
       <Route exact path="/subscription" component={HomepageHeading} />
       <Route exact path="/seasons" component={HomepageHeading} />
-      <Route exact path="/styling" component={HomepageHeading} />
+      {/* <Route exact path="/reviews" component={HomepageHeading} /> */}
       <Route exact path="/howtouse" component={HomepageHeading} />
 
       <Route exact path="/" component={MainHomePageUi} />
@@ -380,7 +380,6 @@ const MainHomePage = () => (
       <Route exact path="/seasons" component={MainHomePageUi} /> 
       <Route exact path="/styling" component={MainHomePageUi} />
       <Route exact path="/howtouse" component={MainHomePageUi} />
-      
 
       {/* <Route exact path="/mypage" component={HomepageHeading} /> */}
     
