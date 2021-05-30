@@ -55,8 +55,9 @@ class SignIn extends Component {
 
             this.handleClose();
             handleLogin(true, data);
-            console.log(response);
-            //history.push("/");
+            
+            localStorage.setItem('email', data.email);
+            localStorage.setItem('nickname', data.nickname);
             
         } catch (error) {
             alert(error);

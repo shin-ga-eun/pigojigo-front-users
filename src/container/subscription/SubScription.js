@@ -39,7 +39,7 @@ function getSteps() {
     return [ 
         <h3>꽃 사이즈를 선택해주세요.</h3>, 
         <h3>꽃 수령 주기를 선택해주세요.</h3>, 
-        <h3>결제 주기를 선택해주세요.</h3>, 
+        <h3>꽃 구독 기간을 선택해주세요.</h3>, 
         <h3>결제 방법을 선택해주세요.</h3>, 
         <h3>더 필요한 게 있으신가요?</h3>, 
     ];
@@ -102,12 +102,12 @@ function SubScription ({history}) {
     }
 
     const handleFormSubmit= async (e) => {
-        e.preventDefault(); // axios를 통하여 데이터를 넘겨주는 부분 구현해야 함
+        e.preventDefault(); 
 
         try {
             const response = await Axios.post("/subscription/apply", {
                 sizeCd, pickUpCycleCd , paymentCycleCd, paymentMthCd, vaseYn,
-                applcntEmail : 'sge7102' }
+                applcntEmail : localStorage.getItem('email') }
                 ,{
                 headers: {
                     "Content-type":"application/json",
@@ -141,7 +141,7 @@ function SubScription ({history}) {
 
     return (
         <div>
-        <Button size='huge' onClick={handleClickOpen} color="teal">
+        <Button size='huge' onClick={handleClickOpen} style={{backgroundColor: '#2962FF', color: '#FFFFFF'}}>
             꽃 정기구독 신청하러가기
             <Icon name='right arrow' />
         </Button>

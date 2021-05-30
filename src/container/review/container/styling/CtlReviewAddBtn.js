@@ -14,7 +14,7 @@ export default class CtlReviewAddBtn extends Component {
         
         reviewCn: '', 
         singleLineEval: '', 
-        applcntEmail:'sge7102',
+        applcntEmail:localStorage.getItem('email'),
 
         file: null,
     }

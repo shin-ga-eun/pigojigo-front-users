@@ -25,7 +25,7 @@ export default class CtlPaymentCycleCd extends Component {
             <Grid textAlign='left'>
                 <Grid.Row style={{marginLeft: 10, marginBottom : 10}}>
                 <Radio
-                    label='1개월마다 자동 결제 '
+                    label='1개월동안 구독'
                     name='radioGroup'
                     value='1'
                     checked={this.state.value === '1'}
@@ -35,7 +35,7 @@ export default class CtlPaymentCycleCd extends Component {
                
                 <Grid.Row style={{marginLeft: 10, marginBottom : 10}}>
                 <Radio
-                    label='2개월마다 자동 결제'
+                    label='2개월동안 구독'
                     name='radioGroup'
                     value='2'
                     checked={this.state.value === '2'}                        
@@ -45,7 +45,7 @@ export default class CtlPaymentCycleCd extends Component {
 
                 <Grid.Row style={{marginLeft: 10}}>
                 <Radio
-                    label='6개월마다 자동 결제'
+                    label='6개월동안 구독'
                     name='radioGroup'
                     value='6'
                     checked={this.state.value === '6'}                        

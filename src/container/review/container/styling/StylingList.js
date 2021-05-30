@@ -15,7 +15,7 @@ export default class StylingList extends Component {
          return <StylingItem reviews={data} />;
      }
   
-      componentDidMount =async () => {
+    componentDidMount =async () => {
           // GET /reviews
           try {
               const response = await axios.get("/reviews");
@@ -31,7 +31,7 @@ export default class StylingList extends Component {
           } catch (e) {
   
           }
-      }
+    }
     render() {
         return (
             <div>

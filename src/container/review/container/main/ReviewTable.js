@@ -55,43 +55,59 @@ const useRowStyles = makeStyles({
       <React.Fragment>
         <TableRow className={classes.root}>
           <TableCell width="3px">
-            <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
+            <IconButton
+              aria-label="expand row"
+              size="small"
+              onClick={() => setOpen(!open)}
+            >
               {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
             </IconButton>
           </TableCell>
-          <TableCell align="center" width="90px">{row.subCnt} 회 구독</TableCell>
-          <TableCell align="left" width="80px">{row.nickname}</TableCell>
-          <TableCell align="center" width="80px">{makeAgeRange(row.birth)}</TableCell>
-          <TableCell align="center" width="50px">{row.sex}</TableCell>
-          <TableCell 
-            align="left" 
-            width='300px'
-            textOverflow='ellipsis'
-            overflow='hidden'
-            whiteSpace='nowrap'>
-                {row.singleLineEval}
+          <TableCell align="center" width="90px">
+            {row.subCnt} 회 구독
           </TableCell>
-          <TableCell align="center" width="180px">{row. reqDtm}</TableCell>
+          <TableCell align="left" width="80px">
+            {row.nickname}
+          </TableCell>
+          <TableCell align="center" width="80px">
+            {makeAgeRange(row.birth)}
+          </TableCell>
+          <TableCell align="center" width="50px">
+            {row.sex}
+          </TableCell>
+          <TableCell
+            align="left"
+            width="300px"
+            textOverflow="ellipsis"
+            overflow="hidden"
+            whiteSpace="nowrap"
+          >
+            {row.singleLineEval}
+          </TableCell>
+          <TableCell align="center" width="180px">
+            {row.reqDtm}
+          </TableCell>
         </TableRow>
         <TableRow>
           <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
             <Collapse in={open} timeout="auto" unmountOnExit>
-
-              <Grid columns={2} textAlign='left' relaxed='very'>
-                  <Grid.Column >
-                    <Card>
-                       <img alt="고객 리뷰사진" src={row.imgUrl} style={{width: 250, height: 300}}/>
-                    </Card>
-                  </Grid.Column>
-                  <Grid.Column style={{marginTop: '5px', marginBottom: '10px'}}>
+              <Grid columns={2} relaxed="very">
+                <Grid.Column textAlign="center">
+                  <Card>
+                    <img
+                      alt="고객 리뷰사진"
+                      src={row.imgUrl}
+                      style={{ width: 380, height: 350 }}
+                    />
+                  </Card>
+                </Grid.Column>
+                <Grid.Column style={{ marginTop: "5px", marginBottom: "10px" }}>
                   <h4>한줄 평가</h4>
-                    {row.singleLineEval}
-                    <h4>고객 후기</h4>
-                    {row.reviewCn}
-                    
-                  </Grid.Column>
+                  {row.singleLineEval}
+                  <h4>고객 후기</h4>
+                  {row.reviewCn}
+                </Grid.Column>
               </Grid>
-          
             </Collapse>
           </TableCell>
         </TableRow>
@@ -121,7 +137,6 @@ export default function ReviewTable(props) {
             <Table aria-label="collapsible table">
                 <TableBody>
                 {reviews && reviews.map((row) => (
-                    
                     <Row key={row.name} row={row} />
                 ))}
                 </TableBody>

@@ -23,15 +23,16 @@ export default class StylingItem extends Component {
                                 <CardActionArea>
                                     <CardMedia
                                         component="img"
-                                        height="250"
+                                        height="340"
                                         image={review.imgUrl}
                                         title={review.nickname}
+                                        alt="리뷰 사진 미등록"
                                     />
                                     <CardContent>
                                         <Typography gutterBottom variant="h7" component="h7">
                                             <b> {review.nickname} 님 </b>
-                                            <b style={{color: '#969696	', marginLeft: 10}}> {review.birth} {review.sex} </b>
-                                            <b style={{color: '#0000FF', marginLeft: 10}}>{review.subCnt} 회 구독중 </b>
+                                            <b style={{color: '#969696', marginLeft: 10}}> {review.birth} {review.sex} </b>
+                                            <b style={{color: '#0000FF', marginLeft: 10}}>{review.subCnt} 번째 구독중 </b>
                                         </Typography>
                                         <Typography gutterBottom variant="h6" component="h6">
                                             {review.singleLineEval}

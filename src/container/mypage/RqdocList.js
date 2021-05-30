@@ -11,7 +11,7 @@ export default class RqdocList extends Component {
 
     componentDidMount = async () => {
 
-        const email = 'sge7102';
+        const email = localStorage.getItem('email');
 
         // GET /artSharing/art/artsList/{pageNum}
         try {
